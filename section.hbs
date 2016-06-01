@@ -35,15 +35,15 @@
       <h4>Arguments</h4>
       {{/if_eq}}
       <div class="clearfix flex white bg-nav">
-        <div class="col col-3 border">Param</div>
-        <div class="col col-2 border">Type</div>
-        <div class="col col-7 border">Details</div>
+        <div class="col col-3">Param</div>
+        <div class="col col-2">Type</div>
+        <div class="col col-7">Details</div>
       </div>
       {{#params}}
         <div class="clearfix flex {{{even_row @index}}}">
-          <div class="col col-3 border">{{name}}</div>
-          <div class="col col-2 border">{{{format_type type}}}</div>
-          <div class="col col-7 border">{{{md description}}}</div>
+          <div class="col col-3">{{name}}</div>
+          <div class="col col-2">{{{format_type type}}}</div>
+          <div class="col col-7">{{{md description}}}</div>
         </div>
       {{/params}}
 
@@ -70,17 +70,17 @@
 
       {{#if properties}}
         <div class="clearfix flex white bg-nav">
-          <div class="col col-3 border">Param</div>
-          <div class="col col-2 border">Type</div>
-          <div class="col col-7 border">Details</div>
+          <div class="col col-3">Param</div>
+          <div class="col col-2">Type</div>
+          <div class="col col-7">Details</div>
         </div>
         {{#properties}}
           <div class="clearfix flex {{{even_row @index}}}">
-            <div class="col col-3 border">
+            <div class="col col-3">
               {{name}}
             </div>
-            <div class="col col-2 border">{{{format_type type}}}</div>
-            <div class="col col-7 border">
+            <div class="col col-2">{{{format_type type}}}</div>
+            <div class="col col-7">
               {{{description}}}
 
               {{#if properties}}
