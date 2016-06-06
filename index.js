@@ -195,8 +195,10 @@ module.exports = function (comments, options, callback) {
       var type_str; 
       if ( type.name !== undefined )
         type_str = type.name.toLowerCase();
-      else
+      else if ( type.expression !== undefined )
         type_str = type.expression.name.toLowerCase();
+      else
+        type_str = '';
       var formatted = remark().use(html, htmlOptions)
         .stringify({
           type: 'root',
