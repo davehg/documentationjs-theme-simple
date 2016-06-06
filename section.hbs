@@ -2,8 +2,8 @@
   {{#if_eq kind "namespace"}}
     <a id='{{permalink}}' class='anchor'></a>
     <h1>{{name}}</h1>
+    {{{md description}}}
     {{#each members.static ~}}<div class='py1'>{{> section}}</div>{{/each}}
-
   {{ else }}
     <a id='{{permalink}}' class='anchor'></a>
     {{#if_not_function}}
