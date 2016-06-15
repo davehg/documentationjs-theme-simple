@@ -185,8 +185,9 @@ module.exports = function (comments, options, callback) {
 
   Handlebars.registerHelper('logo', function () {
     var logo;
-    if ( options.config !== undefined )
-      logo = options.config.logo;
+    if ( options.config !== undefined && options.config.logo !== undefined ) {
+      logo = 'assets/' + options.config.logo.split( '/' ).pop();
+    }
     return logo;
   });
 
@@ -265,7 +266,7 @@ module.exports = function (comments, options, callback) {
   });
 
   // push assets into the pipeline as well.
-  vfs.src([__dirname + '/assets/**'], { base: __dirname })
+  vfs.src([__dirname + '/assets/**', process.cwd() + '/' + options.config.logo ], { base: __dirname })
     .pipe(concat(function (files) {
       callback(null, files.concat(new File({
         path: 'index.html',
