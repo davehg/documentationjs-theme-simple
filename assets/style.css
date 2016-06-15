@@ -1,6 +1,10 @@
 @import url(fonts/source-sans-pro/source-sans-pro.css);
 @import url(fonts/source-code-pro/source-code-pro.css);
 
+body {
+  background-color: #31A3DD;
+}
+
 .documentation a {
   color: #1184CE;
 }
@@ -112,8 +116,11 @@ h4:hover .anchorjs-link {
 }
 
 .bg-nav {
-  background-color: #31A3DD;
-  padding: 5px;
+  border-bottom: 2px solid #31A3DD;
+}
+
+.mirage {
+  color: #31A3DD; 
 }
 
 .bg-list {
@@ -122,6 +129,11 @@ h4:hover .anchorjs-link {
 
 .pdef {
   margin-top:56px;
+}
+
+.scrollbar {
+  overflow-y: scroll;
+  height: 100%;
 }
 
 .scrollbar::-webkit-scrollbar {
@@ -141,11 +153,11 @@ h4:hover .anchorjs-link {
 }
 
 #nav a {
-  color: #fff;
+  color: #31A3DD;
 }
 
 #nav a:hover {
-  background-color: rgba( 255, 255, 255, 0.3 );
+  background-color: rgba( 49, 163, 221, 0.3 );
 }
 
 a.anchor {

@@ -183,6 +183,36 @@ module.exports = function (comments, options, callback) {
           return opts.inverse(this);
   });
 
+  Handlebars.registerHelper('logo', function () {
+    var logo;
+    if ( options.config !== undefined )
+      logo = options.config.logo;
+    return logo;
+  });
+
+  var getLink = function( tags ) {
+    var res;
+    for ( var i = 0; i < tags.length; i++ ) {
+      if ( tags[ i ].title === 'link' ) {
+        res = tags[ i ].description;
+        break;
+      }
+    }
+    return res;
+  }
+
+  Handlebars.registerHelper('link_tags', function () {
+    var link = getLink( this.tags );
+    return link;
+  });
+
+  Handlebars.registerHelper('if_link', function(a, opts) {
+      if( getLink( a ) !== undefined ) // Or === depending on your needs
+          return opts.fn(this);
+      else
+          return opts.inverse(this);
+  });
+
   /**
    * This helper is exposed in templates as `md` and is useful for showing
    * Markdown-formatted text as proper HTML.
