@@ -132,10 +132,21 @@ module.exports = function (comments, options, callback) {
     return this.path.join('.');
   });
 
+  var isTutorial = function ( comment ) {
+    var res = false;
+    for ( var i = 0; i < comment.tags.length; i++ ) {
+      if ( comment.tags[ i ].title === 'tutorial' ) {
+        res = true;
+        break;
+      }
+    }
+    return res;
+  };
+
   Handlebars.registerHelper('name_', function () {
     var memberof = options.name.split( '.' )[ 0 ];
     var name = this.name;
-    if ( this.memberof === memberof )
+    if ( this.memberof === memberof || isTutorial( this ) )
       while ( name.indexOf( '_' ) !== -1 )
         name = name.replace( '_', ' ' );
     return name;
