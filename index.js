@@ -10,42 +10,8 @@ var fs = require('fs'),
   Handlebars = require('handlebars'),
   getDoc = require('globals-docs').getDoc,
   remark = require('remark'),
-  html = require('remark-html'),
-  markdown = require('documentation').formats.md;
+  html = require('remark-html');
 
-
-/**
- * Format link & tutorial tags with simple code inline tags.
- *
- * @param {Array<string>} paths potential linkable namepaths
- * @param {string} text input - typically a description
- * @returns {string} markdown-friendly output
- * @private
- * @example
- * formatInlineTags('{@link Foo}'); // "[Foo](#foo)"
- */
-function formatInlineTags(paths, text) {
-  var output = '';
-  var tokens = inlineLex(text);
-
-  for (var i = 0; i < tokens.length; i++) {
-    if (tokens[i].type === 'text') {
-      output += tokens[i].capture[0];
-    } else if (tokens[i].type === 'link') {
-      var described = tokens[i].capture[1].match(/([^\s|\|]*)(\s|\|)(.*)/);
-      if (described) {
-        // 1 is the match, 3 is description
-        output += autolink(paths, described[1], described[3]);
-      } else {
-        output += autolink(paths, tokens[i].capture[1]);
-      }
-    } else if (tokens[i].type === 'prefixLink') {
-      output += autolink(paths, tokens[i].capture[1], tokens[i].capture[2]);
-    }
-  }
-
-  return output;
-}
 
 /**
  * Link text to this page or to a central resource.
