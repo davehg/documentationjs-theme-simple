@@ -11,7 +11,8 @@ var fs = require('fs'),
   getDoc = require('globals-docs').getDoc,
   remark = require('remark'),
   html = require('remark-html'),
-  inlineLex = require('jsdoc-inline-lex');
+  markdown = require('documentation').formats.md;
+
 
 /**
  * Format link & tutorial tags with simple code inline tags.
@@ -129,7 +130,11 @@ module.exports = function (comments, options, callback) {
   });
 
   Handlebars.registerHelper('permalink', function () {
-    return this.path.join('.');
+    var path = [];
+    for ( var i = 0; i < this.path.length; i++ ) {
+      path.push( this.path[ i ].name );
+    }
+    return path.join('.');
   });
 
   var isTutorial = function ( comment ) {
@@ -228,11 +233,19 @@ module.exports = function (comments, options, callback) {
    * // generates <h2>foo</h2>
    */
   Handlebars.registerHelper('md', function formatMarkdown(string) {
-    return new Handlebars.SafeString(remark().use(html, htmlOptions)
-        .process(formatInlineTags(paths, string)));
+    if ( string !== '' && string !== undefined ) {
+      
+      var ast = {
+        type: 'root',
+        children: string.children
+      };
+
+      return new Handlebars.SafeString( remark().use(html).stringify( ast ) );
+    }
   });
 
   Handlebars.registerHelper('format_type', function (type) {
+
     if ( type !== undefined ) {
       var type_str; 
       if ( type.name !== undefined )
@@ -250,13 +263,6 @@ module.exports = function (comments, options, callback) {
     }
   });
 
-  // Handlebars.registerHelper('format_type', function (type) {
-  //   return remark().use(html, htmlOptions)
-  //     .stringify({
-  //       type: 'root',
-  //       children: utils.formatType(type, paths)
-  //     });
-  // });
 
   Handlebars.registerHelper('highlight', function (example) {
     if (hljsOptions.highlightAuto) {
@@ -266,7 +272,7 @@ module.exports = function (comments, options, callback) {
   });
 
   // push assets into the pipeline as well.
-  vfs.src([__dirname + '/assets/**', process.cwd() + '/' + options.config.logo ], { base: __dirname })
+  vfs.src([__dirname + '/assets/**'/*, process.cwd() + '/' + options.config.logo*/ ], { base: __dirname })
     .pipe(concat(function (files) {
       callback(null, files.concat(new File({
         path: 'index.html',

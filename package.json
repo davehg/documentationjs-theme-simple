@@ -29,11 +29,11 @@
     "globals-docs": "^2.1.0",
     "handlebars": "^3.0.3",
     "highlight.js": "^9.0.0",
-    "jsdoc-inline-lex": "^1.0.1",
     "remark": "^3.0.0",
     "remark-html": "^2.0.0",
     "vinyl": "^1.0.0",
-    "vinyl-fs": "^2.0.0"
+    "vinyl-fs": "^2.0.0",
+    "documentation": "latest"
   },
   "devDependencies": {
     "eslint": "^1.10.3"
