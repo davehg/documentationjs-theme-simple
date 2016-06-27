@@ -216,7 +216,7 @@ module.exports = function (comments, options, callback) {
       var type_str; 
       if ( type.name !== undefined )
         type_str = type.name.toLowerCase();
-      else if ( type.expression !== undefined )
+      else if ( type.expression !== undefined && type.expression.name !== undefined )
         type_str = type.expression.name.toLowerCase();
       else
         type_str = '';
